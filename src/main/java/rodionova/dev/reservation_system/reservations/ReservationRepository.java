@@ -41,11 +41,9 @@ public interface ReservationRepository extends JpaRepository<ReservationEntity, 
             @Param("endDate") LocalDate endDate,
         @Param("status") ReservationStatus status);
 
-    @Query("""
-            SELECT r FROM ReservationEntity r
-            WHERE (:roomId IS NULL OR r.roomId = :roomId)
-            AND (:r.userId IS NULL OR r.userId = :userId
-            """)
+    @Query("SELECT r FROM ReservationEntity r " +
+            "WHERE (:roomId IS NULL OR r.roomId = :roomId) " +
+            "AND (:userId IS NULL OR r.userId = :userId)")
     List<ReservationEntity> searchAllByFilter(
             @Param("roomId") Long roomId,
             @Param("userId") Long userId,
